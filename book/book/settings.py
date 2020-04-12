@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "rest_framework", # rest api             
     "corsheaders", # rest api
-    "account" # user and books detail 
+    "account", # user and books detail 
+    # "rest_framework_swagger", #doc
+    'drf_yasg', #doc 2
+    "jwtauth", #JWT
 ]
 
 MIDDLEWARE = [
@@ -121,7 +124,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_URL = '/static/'
+STATIC_URL = '/staticfiles/'
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles") 
+
+CORS_ORIGIN_ALLOW_ALL = True                                               
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [ 
@@ -130,8 +136,9 @@ REST_FRAMEWORK = {
     "DEFAULT_PARSER_CLASSES": [
         "rest_framework.parsers.JSONParser", 
     ],
-    # "DEFAULT_AUTHENTICATION_CLASSES":                                
-    #     "rest_framework.authentication.SessionAuthentication",        # JWT 
-    #     "rest_framework_simplejwt.authentication.JWTAuthentication",  # JWT 
-    # ],
+    # "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema", #DOCS
+    "DEFAULT_AUTHENTICATION_CLASSES":[                            
+        "rest_framework.authentication.SessionAuthentication",        # JWT 
+        "rest_framework_simplejwt.authentication.JWTAuthentication",  # JWT 
+    ],
 }
