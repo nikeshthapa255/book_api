@@ -37,9 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "rest_framework", # rest api             
+    "corsheaders", # rest api
+    "account" # user and books detail 
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware", # rest api
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -118,3 +122,16 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [ 
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    "DEFAULT_PARSER_CLASSES": [
+        "rest_framework.parsers.JSONParser", 
+    ],
+    # "DEFAULT_AUTHENTICATION_CLASSES":                                
+    #     "rest_framework.authentication.SessionAuthentication",        # JWT 
+    #     "rest_framework_simplejwt.authentication.JWTAuthentication",  # JWT 
+    # ],
+}
